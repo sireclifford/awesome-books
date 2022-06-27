@@ -22,15 +22,15 @@ const retrieveBooks = () => {
 window.onload = () => {
   retrieveBooks();
 };
-const booksArray = [];
+let booksArray = JSON.parse(localStorage.getItem('books'))
+  ? JSON.parse(localStorage.getItem('books'))
+  : [];
 
 const removeBook = (bookId) => {
-  const foundBook = JSON.parse(localStorage.getItem('books')).find(
-    (book) => book.id === bookId * 1,
+  const temp = JSON.parse(localStorage.getItem('books')).filter(
+    (book) => book.id !== bookId,
   );
-  const temp = JSON.parse(localStorage.getItem('books'));
-  const index = temp.map((object) => object.id).indexOf(foundBook.id);
-  temp.splice(index, 1);
+  booksArray = temp;
   localStorage.setItem('books', JSON.stringify(temp));
   retrieveBooks();
 };
