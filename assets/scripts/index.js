@@ -5,7 +5,7 @@ const retrieveBooks = () => {
       .map(
         (book) => `<li class="book-item" data-id="${book.id}">
         <div class="book-item__info">
-          <h2 class="book-item__title">${book.title}</h2>
+          <p class="book-item__title">${book.title}</p>
           <p class="book-item__author">${book.author}</p>
           <button class="removeFromShelfBtn" onclick="removeBook(${book.id})">
             Remove
@@ -31,7 +31,7 @@ const removeBook = (bookId) => {
     (book) => book.id !== bookId,
   );
   booksArray = temp;
-  localStorage.setItem('books', JSON.stringify(temp));
+  localStorage.setItem('books', JSON.stringify(booksArray));
   retrieveBooks();
 };
 
