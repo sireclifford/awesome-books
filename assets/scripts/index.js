@@ -1,53 +1,88 @@
+const retrieveBooks = () => {
+  const bookList = document.querySelector('.books-list');
+  if (localStorage.getItem('books')) {
+    const books = JSON.parse(localStorage.getItem('books'))
+      .map(
+        (book) => `<li class="book-item" data-id="${book.id}">
+        <div class="book-item__info">
+          <h2 class="book-item__title">${book.title}</h2>
+          <p class="book-item__author">${book.author}</p>
+          <button class="removeFromShelfBtn" onclick="removeBook(${book.id})">
+            Remove
+          </button>
+        </div>  </li>`,
+      )
+      .join('');
+    bookList.innerHTML = books;
+  } else {
+    console.log('No books found');
+  }
+};
+
+window.onload = () => {
+  retrieveBooks();
+};
 const booksArray = [];
 
-removeBook = (bookId) => {
-  const foundBook = booksArray.find((book) => book.id === bookId);
-  const index = booksArray.indexOf(foundBook);
-  booksArray.splice(index, 1);
+const removeBook = (bookId) => {
+  const foundBook = JSON.parse(localStorage.getItem('books')).find(
+    (book) => book.id === bookId * 1,
+  );
+  const temp = JSON.parse(localStorage.getItem('books'));
+  const index = temp.map((object) => object.id).indexOf(foundBook.id);
+  temp.splice(index, 1);
+  localStorage.setItem('books', JSON.stringify(temp));
+  retrieveBooks();
 };
 
-retrieveBooks = () => {
-  console.log("i have been called to retrieve books");
-  const bookList = document.querySelector(".books-list");
+const addBtn = document.querySelector('.AddToShelfBtn');
 
-  const books =
-    booksArray ||
-    localStorage
-      .getItem("books")
-      .map(
-        (book) =>
-          `<div class="book">
-          <div>
-            <p class="title">${book.title}</p>
-          </div>
-          <div>
-            <p class="author">${book.author}</p>
-          </div>
-          <div>
-            <button class="removeFromShelfBtn" id="${book.id}">Remove</button>
-          </div>
-        </div>
-        `
-      )
-      .join("");
+const booksList = document.querySelector('.books-list');
 
-  const range = document.createRange();
+addBtn.addEventListener('click', () => {
+  const title = document.getElementsByClassName('titleTxt')[0].value;
+  const author = document.querySelector('.authorTxt').value;
 
-  range.selectNode(bookList);
-  const fragment = range.createContextualFragment(books);
-  bookList.appendChild(fragment);
+  if (title === '' || author === '') {
+    alert('Book title and author are required');
+  } else {
+    const foundBook = booksArray.find((book) => book.title === title);
+    if (!foundBook) {
+      const book = {
+        id: booksArray.length,
+        title,
+        author,
+      };
 
-  const bookCard = bookList.querySelector(".book");
-  bookCard.setAttribute("style", "display: block");
+      booksArray.push(book);
+      localStorage.setItem('books', JSON.stringify(booksArray));
 
-  const removeFromShelfBtn = document.querySelector(".removeFromShelfBtn");
-  removeFromShelfBtn.addEventListener("click", (e) => {
-    const bookId = e.target.id;
-    removeBook(bookId);
-  });
-};
+      const bookCard = document.createElement('div');
+      bookCard.classList.add('book');
+      bookCard.setAttribute('style', 'display: block');
+      booksList.appendChild(bookCard);
 
-const addBtn = document.querySelector(".AddToShelfBtn");
-const removeBtn = document.querySelector(".removeFromShelfBtn");
+      const bookTitle = document.createElement('p');
+      bookTitle.classList.add('title');
+      bookTitle.innerHTML = title;
+      bookCard.appendChild(bookTitle);
 
-// Do the rest of the work here
+      const bookAuthor = document.createElement('p');
+      bookAuthor.classList.add('author');
+      bookAuthor.innerHTML = author;
+      bookCard.appendChild(bookAuthor);
+
+      const removeFromShelfBtn = document.createElement('button');
+      removeFromShelfBtn.classList.add('removeFromShelfBtn');
+      removeFromShelfBtn.setAttribute('id', book.id);
+      removeFromShelfBtn.innerHTML = 'Remove';
+      removeFromShelfBtn.addEventListener('click', (e) => {
+        const bookId = e.target.id;
+        removeBook(bookId);
+      });
+      bookCard.appendChild(removeFromShelfBtn);
+    } else {
+      alert('Book already exists');
+    }
+  }
+});
