@@ -15,11 +15,11 @@
 
 👤 **Author1**
 
-- GitHub: [@githubhandle](https://github.com/sireclifford)
+- GitHub: [Clifford Owusu](https://github.com/sireclifford)
 
 👤 **Author2**
 
-- GitHub: [@githubhandle](https://github.com/MicroverseNelson)
+- GitHub: [Nelson Ongiti](https://github.com/MicroverseNelson)
 
 
 ## 📝 License
