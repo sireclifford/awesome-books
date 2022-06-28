@@ -6,17 +6,77 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  border: 5px dashed goldenrod;
+  padding-top: 30px;
+  padding-bottom: 40px;
 }
 
 .book {
   display: none;
 }
 
-.book-item {
+.books-list {
+  width: 800px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
-  list-style-type: none;
+  margin-bottom: 30px;
+}
+
+.book-item {
+  list-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.book-item__info {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.book-item:nth-child(odd) {
+  background-color: #eaeaea;
+}
+
+.data-form {
+  border: 3px solid mistyrose;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+input[type="text"] {
+  width: 300px;
+  height: 20px;
+  padding: 10px;
+}
+
+button.AddToShelfBtn {
+  align-self: flex-end;
+  padding: 5px;
+  width: 100px;
+  font-family: "Circular-Loom", sans-serif;
+  font-size: 16px;
+}
+
+button.removeFromShelfBtn {
+  padding: 20px;
+  padding: 5px;
+  width: 100px;
+  font-family: "Circular-Loom", sans-serif;
+  font-size: 16px;
+}
+
+p.book-item__title {
+  font-size: 18px;
+  font-family: "Circular-Loom", sans-serif;
+}
+
+.data-form h2 {
+  font-family: "Circular-Loom", sans-serif;
+  font-size: 27px;
 }
