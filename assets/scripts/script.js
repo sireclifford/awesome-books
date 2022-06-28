@@ -1,9 +1,10 @@
 class BookStore {
-    constructor() {
-      this.booksArray = JSON.parse(localStorage.getItem('books'))
-        ? JSON.parse(localStorage.getItem('books'))
-        : [];
-    }
+  constructor() {
+    this.booksArray = JSON.parse(localStorage.getItem('books'))
+      ? JSON.parse(localStorage.getItem('books'))
+      : [];
+  }
+
     removeBook = (bookId) => {
       const temp = this.booksArray.filter(
         (book) => book.id !== bookId,
@@ -12,6 +13,7 @@ class BookStore {
       localStorage.setItem('books', JSON.stringify(this.booksArray));
       this.retrieveBooks();
     };
+
     retrieveBooks = () => {
       const bookList = document.querySelector('.books-list');
       bookList.innerHTML = '';
@@ -40,6 +42,7 @@ class BookStore {
         console.log('No books found');
       }
     };
+
     addBook = (title, author) => {
       const foundBook = this.booksArray.find((book) => book.title === title);
       if (!foundBook) {
@@ -53,19 +56,19 @@ class BookStore {
         this.retrieveBooks();
       }
     };
+}
+window.onload = () => {
+  const bookStore = new BookStore();
+  bookStore.retrieveBooks();
+};
+const addBtn = document.querySelector('.AddToShelfBtn');
+addBtn.addEventListener('click', () => {
+  const bookStore = new BookStore();
+  const title = document.getElementsByClassName('titleTxt')[0].value;
+  const author = document.querySelector('.authorTxt').value;
+  if (title === '' || author === '') {
+    alert('Book title and author are required');
+  } else {
+    bookStore.addBook(title, author);
   }
-  window.onload = () => {
-    const bookStore = new BookStore();
-    bookStore.retrieveBooks();
-  };
-  const addBtn = document.querySelector('.AddToShelfBtn');
-  addBtn.addEventListener('click', () => {
-    const bookStore = new BookStore();
-    const title = document.getElementsByClassName('titleTxt')[0].value;
-    const author = document.querySelector('.authorTxt').value;
-    if (title === '' || author === '') {
-      alert('Book title and author are required');
-    } else {
-      bookStore.addBook(title, author);
-    }
-  });
+});
