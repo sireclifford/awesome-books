@@ -8,18 +8,68 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
-    <section class="wrapper">
-      <h1>Awesome Books</h1>
-      <div class="books-list">
-        
+    <header>
+      <nav class="menu">
+        <h2>Awesome Books</h2>
+        <ul class="navbar">
+          <li class="nav-link border-right">
+            <a href="#" id="bookslist">List</a>
+          </li>
+          <li class="nav-link border-right">
+            <a href="#" id="addbooks">Add New</a>
+          </li>
+          <li class="nav-link">
+            <a href="#" id="contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="datetime">
       </div>
-      <div class="data-form">
-        <h2>Add a new book</h2>
-          <input class="titleTxt" type="text" id="title" placeholder="Title" />
-          <input class="authorTxt" type="text" id="Author" placeholder="Author" />
-          <button type="submit" class="AddToShelfBtn">Add</button>
-      </div>
-    </section>
+  </header>
+    <main>
+      <section class="booklist">
+        <div class="title">
+          <h1>All awesome books</h1>
+        </div>
+        <div class="container">
+          <ul class="books-list"></ul>
+        </div>
+      </section>
+
+      <section class="addnew">
+        <div class="title">
+          <h2>Add a new book</h2>
+        </div>
+        <div class="container">
+          <div id="form">
+            <input type="text" id="title-input" name="title" placeholder="Title" required />
+            <input type="text" id="author-input" name="author" placeholder="Author" required />
+            <div class="btn">
+              <button type="button" class="AddToShelfBtn">Add</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contacts">
+        <div class="title">
+          <h2>Contact Information</h2>
+        </div>
+        <div class="container">
+          <div class="contact-details">
+            <p>Reach us on our Github pages</p>
+            <ul class="info">
+              <li>
+                <a href="https://github.com/MicroverseNelson">Nelson Ongiti</a>
+              </li>
+             <li>
+              <a href="https://github.com/sireclifford">Clifford Owusu</a>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  </main>
      <script src="assets/scripts/script.js"></script> 
   </body>
 </html>
